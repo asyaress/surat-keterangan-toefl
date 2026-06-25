@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Download Dokumen TOEFL</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f7f9;
+        --surface: #ffffff;
+        --ink: #18202a;
+        --muted: #5b6673;
+        --line: #d9dee7;
+        --accent: #0f766e;
+        --accent-dark: #115e59;
+        --soft: #e8f4f2;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background:
+          linear-gradient(135deg, rgba(15, 118, 110, 0.08), transparent 35%),
+          var(--bg);
+        color: var(--ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+      }
+
+      main {
+        width: min(100%, 760px);
+        display: grid;
+        gap: 18px;
+      }
+
+      .panel {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        box-shadow: 0 18px 48px rgba(24, 32, 42, 0.08);
+        padding: clamp(20px, 4vw, 36px);
+      }
+
+      .header {
+        display: grid;
+        gap: 10px;
+        margin-bottom: 24px;
+      }
+
+      .eyebrow {
+        margin: 0;
+        color: var(--accent-dark);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(28px, 5vw, 44px);
+        line-height: 1.04;
+        letter-spacing: 0;
+      }
+
+      .subtitle {
+        margin: 0;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .content {
+        display: grid;
+        grid-template-columns: minmax(220px, 280px) 1fr;
+        gap: 24px;
+        align-items: center;
+      }
+
+      .qr-frame {
+        width: 100%;
+        aspect-ratio: 1;
+        display: grid;
+        place-items: center;
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .qr-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 18px 0;
+      }
+
+      a.button,
+      button {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        padding: 10px 14px;
+        font: inherit;
+        font-weight: 700;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      a.button {
+        background: var(--accent);
+        color: white;
+      }
+
+      a.button:hover {
+        background: var(--accent-dark);
+      }
+
+      button {
+        background: var(--soft);
+        color: var(--accent-dark);
+        border-color: #bee3de;
+      }
+
+      button:hover {
+        background: #d9eeea;
+      }
+
+      .link-box {
+        overflow-wrap: anywhere;
+        border: 1px dashed var(--line);
+        border-radius: 8px;
+        background: #fbfcfd;
+        padding: 12px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .note {
+        margin: 14px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      @media (max-width: 680px) {
+        body {
+          place-items: start center;
+        }
+
+        .content {
+          grid-template-columns: 1fr;
+        }
+
+        .qr-frame {
+          max-width: 320px;
+          justify-self: center;
+        }
+      }
+
+      @media print {
+        body {
+          background: white;
+          padding: 0;
+        }
+
+        .panel {
+          border: 0;
+          box-shadow: none;
+        }
+
+        .actions,
+        .note {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="panel" aria-labelledby="title">
+        <div class="header">
+          <p class="eyebrow">Dokumen digital</p>
+          <h1 id="title">Download Surat Keterangan TOEFL</h1>
+          <p class="subtitle">
+            Scan QR di bawah untuk mengunduh file DOCX secara langsung.
+          </p>
+        </div>
+
+        <div class="content">
+          <div class="qr-frame">
+            <img id="qr" alt="QR code untuk download dokumen" />
+          </div>
+
+          <div>
+            <div class="actions">
+              <a class="button" id="download" download>Download DOCX</a>
+              <button type="button" id="print">Cetak QR</button>
+            </div>
+
+            <div class="link-box" id="download-link"></div>
+            <p class="note">
+              Setelah deploy ke Vercel, buka halaman ini dari domain Vercel
+              lalu cetak atau screenshot QR-nya. QR akan mengarah ke file DOCX
+              di domain tersebut.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const fileName = "surat-keterangan-toefl-ft-unmul.docx";
+      const downloadUrl = new URL(fileName, window.location.href).toString();
+      const qrUrl = new URL("https://api.qrserver.com/v1/create-qr-code/");
+
+      qrUrl.searchParams.set("size", "720x720");
+      qrUrl.searchParams.set("margin", "16");
+      qrUrl.searchParams.set("data", downloadUrl);
+
+      document.getElementById("download").href = downloadUrl;
+      document.getElementById("qr").src = qrUrl.toString();
+      document.getElementById("download-link").textContent = downloadUrl;
+      document.getElementById("print").addEventListener("click", () => {
+        window.print();
+      });
+    </script>
+  </body>
+</html>
