@@ -230,8 +230,8 @@
     </main>
 
     <script>
-      const fileName = "surat-keterangan-toefl-ft-unmul.docx";
-      const downloadUrl = new URL(fileName, window.location.href).toString();
+      const downloadPage = "download.html";
+      const downloadUrl = new URL(downloadPage, window.location.href).toString();
       const qrUrl = new URL("https://api.qrserver.com/v1/create-qr-code/");
 
       qrUrl.searchParams.set("size", "720x720");

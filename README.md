@@ -5,6 +5,7 @@ Project statis ini siap di-deploy ke Vercel.
 ## File penting
 
 - `index.html`: halaman untuk menampilkan QR dan tombol download.
+- `download.html`: halaman perantara agar Safari/iPhone tetap punya tombol fallback.
 - `surat-keterangan-toefl-ft-unmul.docx`: file yang akan diunduh saat QR discan.
 - `vercel.json`: header agar file DOCX dikirim sebagai attachment/download.
 
@@ -19,5 +20,5 @@ Project statis ini siap di-deploy ke Vercel.
 QR akan otomatis mengarah ke:
 
 ```text
-https://domain-vercel-anda/surat-keterangan-toefl-ft-unmul.docx
+https://domain-vercel-anda/download.html
 ```
