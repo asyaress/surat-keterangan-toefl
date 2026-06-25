@@ -102,7 +102,10 @@
     </main>
 
     <script>
-      window.location.replace("./unduh.html");
+      const fileName = "surat-keterangan-toefl-ft-unmul.docx";
+      const fileUrl = new URL(fileName, window.location.href).toString();
+
+      document.getElementById("download").href = fileUrl;
     </script>
   </body>
 </html>

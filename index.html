@@ -214,15 +214,15 @@
 
           <div>
             <div class="actions">
-              <a class="button" id="download" download>Unduh Dokumen</a>
+              <a class="button" id="download">Buka Halaman Unduhan</a>
               <button type="button" id="print">Cetak QR</button>
             </div>
 
             <div class="link-box" id="download-link"></div>
             <p class="note">
               Setelah deploy ke Vercel, buka halaman ini dari domain Vercel
-              lalu cetak atau screenshot QR-nya. QR akan mengarah ke file DOCX
-              di domain tersebut.
+              lalu cetak atau screenshot QR-nya. QR akan mengarah ke halaman
+              unduhan dokumen di domain tersebut.
             </p>
           </div>
         </div>
@@ -230,7 +230,7 @@
     </main>
 
     <script>
-      const downloadPage = "download.html";
+      const downloadPage = "unduh.html";
       const downloadUrl = new URL(downloadPage, window.location.href).toString();
       const qrUrl = new URL("https://api.qrserver.com/v1/create-qr-code/");
 
